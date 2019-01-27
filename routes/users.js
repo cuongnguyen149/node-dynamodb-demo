@@ -7,13 +7,13 @@ var checkUserExist = require('../utils/user');
 router.get('/', function (req, res, next) {
   var params = {
     TableName: "Users",
-    ProjectionExpression: "#id, #userName, #email, #dob, #age, #description",
+    ProjectionExpression: "#id, #userName, #email, #dob, #zipcode, #description",
     ExpressionAttributeNames: {
       "#id": "id",
       "#userName": "userName",
       "#email": "email",
       "#dob": "dob",
-      "#age": "age",
+      "#zipcode": "zipcode",
       "#description": "description"
     }
   };
@@ -51,16 +51,16 @@ router.post('/', function (req, res, next) {
       console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
     } else {
       if (data.Items && data.Items.length > 0) {
-        res.send({ message: "Email already exist! Please try with other email." });
+        res.status(400).send("Email already exist! Please try with other email.");
       } else {
         var params = {
           TableName: "Users",
           Item: {
             "id": user.id,
-            "userName": user.userName,
+            "userName": user.user_name,
             "email": user.email,
             "dob": user.dob,
-            "age": user.age,
+            "zipcode": user.zipcode,
             "description": user.description
           }
         };
@@ -86,11 +86,11 @@ router.put('/', function (req, res, next) {
     Key: {
       "email": user.email
     },
-    UpdateExpression: "set userName=:n, dob=:dob, age=:a, description=:des",
+    UpdateExpression: "set userName=:n, dob=:dob, zipcode=:a, description=:des",
     ExpressionAttributeValues: {
       ":n": user.userName,
       ":dob": user.dob,
-      ":a": user.age,
+      ":a": user.zipcode,
       ":des": user.description
     },
     ReturnValues: "UPDATED_NEW"
