@@ -15,6 +15,10 @@ java(for run DynamoDB local): 6 or above
   ```
   https://amudabadmus.wordpress.com/2017/09/07/how-to-install-dynamodb-on-windows/
   ```
+3. Install nodemon:
+```
+npm install -g nodemon
+```
 ## Run Project
 ### Open cmd and move to project folder
 run:
