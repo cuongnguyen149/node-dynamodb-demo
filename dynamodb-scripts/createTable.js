@@ -7,13 +7,14 @@ AWS.config.update({
     endpoint: "http://localhost:8000"
 });
 var dynamodb = new AWS.DynamoDB();
+const tableName = "Users";
 var params = {
-    TableName: "Users",
+    TableName: tableName,
     KeySchema: [
-        { AttributeName: "email", KeyType: "HASH" },  //Partition key
+        { AttributeName: "id", KeyType: "HASH" },  //Partition key
     ],
     AttributeDefinitions: [
-        { AttributeName: "email", AttributeType: "S" },
+        { AttributeName: "id", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
         ReadCapacityUnits: 10,
