@@ -1,10 +1,9 @@
 var AWS = require("aws-sdk");
 AWS.config.update({
-    "apiVersion": "2012-08-10",
-    "accessKeyId": "abcde",
-    "secretAccessKey": "abcde",
-    region: "eu-west-2",
-    endpoint: "http://localhost:8000"
+    "accessKeyId": "AKIAJSGWA37IMIW6AC7Q",
+    "secretAccessKey": "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",
+    region: "us-east-1",
+    // endpoint: "http://localhost:8000"
 });
 var dynamodb = new AWS.DynamoDB();
 const tableName = "Users";
@@ -17,8 +16,8 @@ var params = {
         { AttributeName: "id", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
-        ReadCapacityUnits: 10,
-        WriteCapacityUnits: 10
+        ReadCapacityUnits: 5,
+        WriteCapacityUnits: 5
     }
 };
 dynamodb.createTable(params, function (err, data) {
